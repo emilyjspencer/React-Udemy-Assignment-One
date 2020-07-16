@@ -21,17 +21,23 @@ class App extends Component {
     // this method takes an event as an argument - because we need to use event.target.value with inputs
     this.setState({ userInput: event.target.value });
     // use setState() to update the state from userInput being an empty string to being equal to what the user enters
-
-
   }
 
+  deleteCharCharacter = (index) => {
+
+    const text = this.state.userInput.split('');
+    text.splice(index, 1);
+    const updatedText = text.join('');
+    this.setState({ userInput: updatedText})
+
+  }
   //render  a list of charcomponents
 
 
   render() {
 
     const charList = this.state.userInput.split('').map((char, index) => {
-      return <CharComponent character={char} key={index} />
+      return <CharComponent character={char} key={index} onClick={() => this.deleteCharCharacter(index)} />
     });
 
 
